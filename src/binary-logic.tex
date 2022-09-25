@@ -1,9 +1,32 @@
 \documentclass{article}
+\usepackage{circuitikz}
 
-\title{Circuits}
+\title{Binary Logic}
+\author{Tristan Slater}
+
+\usetikzlibrary{arrows}
+\ctikzset{
+    logic ports=ieee,
+    % logic ports/scale=0.8,
+}
 
 \begin{document}
     \maketitle
 
-    
+    \section{XOR}
+
+    \begin{figure}[h]
+        \begin{circuitikz}
+            \node[nand port] (nand) at (2, 0) {};
+            \node[or port] (or) at (2, 2) {};
+            \node[and port] (and) at (5, 1) {};
+
+            \draw (or.in 1) -- ++(-0.5, 0) node[circ](term1){} -- ++(-1, 0);
+            \draw (or.in 2) -- ++(-1, 0) node[circ](term2){} -- ++(-0.5, 0);
+            \draw (term1) |- (nand.in 1);
+            \draw (term2) |- (nand.in 2);
+            \draw (nand.out) -- (and.in 2);
+            \draw (or.out) -- (and.in 1);
+        \end{circuitikz}
+    \end{figure}
 \end{document}
