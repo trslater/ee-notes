@@ -41,36 +41,6 @@
         \item Commutative
     \end{itemize}
 
-    \section{Laplace Transform}
-
-    \begin{equation}
-        F(s) = \mathscr{L}\{f(t)\} = \int_0^\infty{e^{-st} f(t) dt}
-    \end{equation}
-
-    \begin{table}[h]
-        \centering
-        \caption{Laplace Lookup}
-        $$\def\arraystretch{3}
-        \begin{array}{>$l<$>{\displaystyle}c|>{\displaystyle}c}
-            & f(t) = \mathscr{L}^{-1}\{F(s)\} & F(s) = \mathscr{L}\{f(t)\} \\
-            \hline
-            Multiplying by a Constant & af(at) & aF(s) \\
-            Time Scaling & f(at) & \frac{1}{a}F\left(\frac{s}{a}\right) \\
-            Frequency Scaling & \frac{1}{a}f\left(\frac{t}{a}\right) & F(as) \\
-            Time Shifting & f(t - a)u(t - a) & e^{-at}F(s) \\
-            Frequency Shifting & e^{at} f(t) & F(s - a) \\
-            \hline
-            Convolution & (f * g)(t) & F(s)G(s) = G(s)F(s) \\
-            \hline
-            & 1 & \frac{1}{s} \\
-            & t^n & \frac{n!}{s^{n + 1}} \\
-            & \sin{at} & \frac{a}{s^2 + a^2} \\
-            & \cos{at} & \frac{s}{s^2 + a^2} \\
-            & \sinh{at} & \frac{a}{s^2 - a^2} \\
-            & \cosh{at} & \frac{s}{s^2 - a^2} \\
-        \end{array}$$
-    \end{table}
-
     \section{Transfer Functions}
 
     $$\begin{aligned}
