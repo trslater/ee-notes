@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{amsmath}
+\usepackage{mathrsfs}
 \usepackage{extarrows}
 
 \title{Control Theory}
@@ -27,4 +28,13 @@
     \begin{equation}
         x(t + \delta) \xlongrightarrow{F} y(t + \delta)
     \end{equation}
+
+    \section{Transfer Functions}
+
+    $$\begin{aligned}
+        a_2\ddot{x} + a_1\dot{x} + a_0x &= b_2\ddot{y} + b_1\dot{y} + b_0y \\
+        \mathscr{L}\{a_2\ddot{x} + a_1\dot{x} + a_0x\} &= \mathscr{L}\{b_2\ddot{y} + b_1\dot{y} + b_0y\} \\
+        a_2s^2X(s) + a_1sX(s) + a_0X(s) &= b_2s^2Y(s) + b_1sY(S) + b_0Y(s) \\
+        G(s) = \frac{Y(s)}{X(s)} &= \frac{b_2s^2 + b_1s + b_0}{a_2s^2 + a_1s + a_0} \\
+    \end{aligned}$$
 \end{document}
