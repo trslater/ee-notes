@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{extarrows}
+
+\title{Control Theory}
+\author{Tristan Slater}
+
+\begin{document}
+    \maketitle
+
+    \section{Systems}
+
+    \subsection{Linearity}
+
+    \begin{equation}
+        f(ax + by) = af(x) + bf(y)
+    \end{equation}
+
+    \subsection{Time-Invariance}
+
+    Transfer function is not directly dependent on time: \begin{equation}
+        y(t) = F(x(t), t) = F(x(t))
+    \end{equation}
+
+    This also means that any shift to time in input translates to the same shift in the output.
+
+    \begin{equation}
+        x(t + \delta) \xlongrightarrow{F} y(t + \delta)
+    \end{equation}
+\end{document}
