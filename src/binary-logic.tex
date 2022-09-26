@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage{circuitikz}
+\usepackage{amsmath}
+\usepackage{float}
 
 \title{Binary Logic}
 \author{Tristan Slater}
@@ -15,7 +17,7 @@
 
     \section{XOR}
 
-    \begin{figure}[h]
+    \begin{figure}[H]
         \begin{circuitikz}
             \node[nand port] (nand) at (2, 0) {};
             \node[or port] (or) at (2, 2) {};
@@ -27,6 +29,106 @@
             \draw (term2) |- (nand.in 2);
             \draw (nand.out) -- (and.in 2);
             \draw (or.out) -- (and.in 1);
+        \end{circuitikz}
+    \end{figure}
+    
+    \begin{figure}[H]
+        \begin{circuitikz}
+            \node[xor port] (xor) at (0, 0) {};
+        \end{circuitikz}
+    \end{figure}
+
+    \section{Half Adder}
+
+    \begin{figure}[H]
+        \begin{circuitikz}
+            \node[and port] (and) at (2, 0) {};
+            \node[xor port] (xor) at (2, 2) {};
+
+            \draw (xor.in 1) -- ++(-0.5, 0) node[circ](term1){} -- ++(-1, 0);
+            \draw (xor.in 2) -- ++(-1, 0) node[circ](term2){} -- ++(-0.5, 0);
+            \draw (term1) |- (and.in 1);
+            \draw (term2) |- (and.in 2);
+        \end{circuitikz}
+    \end{figure}
+    
+    \begin{figure}[H]
+        \begin{circuitikz}
+            \node[fourport, t=H] (ha) at (0, 0) {};
+
+            \draw[<-] (ha.north east) -- ++(0, 1) node[above] {$A$};
+            \draw[<-] (ha.north west) -- ++(0, 1) node[above] {$B$};
+            \draw[->] (ha.west) -- ++(-1, 0) node[left] {$C$};
+            \draw[->] (ha.south) -- ++(0, -1) node[below] {$S$};
+        \end{circuitikz}
+    \end{figure}
+
+    \section{Full Adder}
+
+    \begin{figure}[H]
+        \begin{circuitikz}
+            \node[fourport, t=H] (h1) at (3, 3) {};
+            \node[fourport, t=H] (h2) at (5, 0) {};
+            \node[or port, rotate=180] (or) at (0, 1) {};
+
+            % Inputs
+            \draw[<-] (h2.north east) |- ++(1, 1) node[above]{$C_\text{in}$};
+            \draw[<-] (h1.north east) -- ++(0, 1) node[above]{$A$};
+            \draw[<-] (h1.north west) -- ++(0, 1) node[above]{$B$};
+
+            % Carry out
+            \draw (h1.west) -- ++(-0.5, 0) -- (or.in 2);
+            \draw (h2.west) -- ++(-2, 0) -- (or.in 1);
+            \draw[->] (or.out) -- ++(-1, 0) node[left]{$C_\text{out}$};
+
+            % Passthrough
+            \draw[->] (h1.south) |- ++(0.5, -0.5) -| (h2.north west);
+
+            % Sum
+            \draw[->] (h2.south) -- ++(0, -1) node[below]{$S$};
+        \end{circuitikz}
+    \end{figure}
+    
+    \begin{figure}[H]
+        \begin{circuitikz}
+            \node[fourport, t=F] (fa) at (0, 0) {};
+
+            \draw[<-] (ha.east) -- ++(1, 0) node[right] {$C_\text{in}$};
+            \draw[<-] (ha.north east) -- ++(0, 1) node[above] {$A$};
+            \draw[<-] (ha.north west) -- ++(0, 1) node[above] {$B$};
+            \draw[->] (ha.west) -- ++(-1, 0) node[left] {$C_\text{out}$};
+            \draw[->] (ha.south) -- ++(0, -1) node[below] {$S$};
+        \end{circuitikz}
+    \end{figure}
+
+    \subsection{3-Bit Adder Example}
+
+    \begin{figure}[H]
+        \begin{circuitikz}
+            \node[fourport, t=F] (f0) at (9, 0) {};
+            \node[fourport, t=F] (f1) at (6, 0) {};
+            \node[fourport, t=F] (f2) at (3, 0) {};
+
+            % A
+            \draw[<-] (f0.north east) -- ++(0, 1) node[above] {$A_0$};
+            \draw[<-] (f1.north east) -- ++(0, 1) node[above] {$A_1$};
+            \draw[<-] (f2.north east) -- ++(0, 1) node[above] {$A_2$};
+            
+            % B
+            \draw[<-] (f0.north west) -- ++(0, 1) node[above] {$B_0$};
+            \draw[<-] (f1.north west) -- ++(0, 1) node[above] {$B_1$};
+            \draw[<-] (f2.north west) -- ++(0, 1) node[above] {$B_2$};
+            
+            % Carrying
+            \draw[<-] (f0.east) -- ++(1, 0) node[right] {$C_\text{in}$};
+            \draw[->] (f0.west) -- (f1.east);
+            \draw[->] (f1.west) -- (f2.east);
+            \draw[->] (f2.west) -- ++(-1, 0) node[left] {$C_\text{out}$};
+
+            % Sum
+            \draw[->] (f0.south) -- ++(0, -1) node[below] {$S_0$};
+            \draw[->] (f1.south) -- ++(0, -1) node[below] {$S_1$};
+            \draw[->] (f2.south) -- ++(0, -1) node[below] {$S_2$};
         \end{circuitikz}
     \end{figure}
 \end{document}
