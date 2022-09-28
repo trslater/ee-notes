@@ -3,13 +3,15 @@
 \usepackage{mathrsfs}
 \usepackage{extarrows}
 \usepackage{array}
-\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
 
 \title{Laplace Transform}
 \author{Tristan Slater}
 
 \begin{document}
     \maketitle
+
+    \tableofcontents
     
     \section{Definition}
 
@@ -17,9 +19,28 @@
         F(s) = \mathscr{L}\{f(t)\} = \int_0^\infty{e^{-st} f(t) dt}
     \end{equation}
 
+    \subsection{Inverse}
+
+    \begin{equation}
+        f(t) = \mathscr{L}^{-1}\{F(s)\} = \frac{1}{2\pi j}\int_{c - j\infty}^{c + j\infty}{e^{st}F(s)\ ds}
+    \end{equation}
+    
+    $$t > 0$$
+
+    \section{properties}
+
+    \begin{itemize}
+        \item Linear
+        \item 
+    \end{itemize}
+
+    \section{Solving Laplace Equations}
+    
+    \section{Solving Inverse Laplace Equations}
+    
     \begin{table}[h]
         \centering
-        \caption{Laplace Lookup}
+        \caption{Laplace Transform Operations}
         $$\def\arraystretch{3}
         \begin{array}{>$l<$>{\displaystyle}c|>{\displaystyle}c}
             & f(t) = \mathscr{L}^{-1}\{F(s)\} & F(s) = \mathscr{L}\{f(t)\} \\
@@ -29,15 +50,37 @@
             Frequency Scaling & \frac{1}{a}f\left(\frac{t}{a}\right) & F(as) \\
             Time Shifting & f(t - a)u(t - a) & e^{-at}F(s) \\
             Frequency Shifting & e^{at} f(t) & F(s - a) \\
+            Convolution & (f * g)(t) & F(s)G(s) \\
+        \end{array}$$
+    \end{table}
+
+    \begin{table}[h]
+        \centering
+        \caption{Laplace Transform Base Functions}
+        $$\def\arraystretch{3}
+        \begin{array}{>{\displaystyle}c|>{\displaystyle}c}
+            f(t) = \mathscr{L}^{-1}\{F(s)\} & F(s) = \mathscr{L}\{f(t)\} \\
             \hline
-            Convolution & (f * g)(t) & F(s)G(s) = G(s)F(s) \\
+            \delta(t) & 1 \\
+            u(t) & \frac{1}{s} \\
+            t & \frac{1}{s^2} \\
+            t^n & \frac{n!}{s^{n + 1}} \\
+            \sin{at} & \frac{a}{s^2 + a^2} \\
+            \cos{at} & \frac{s}{s^2 + a^2} \\
+            \sinh{at} & \frac{a}{s^2 - a^2} \\
+            \cosh{at} & \frac{s}{s^2 - a^2} \\
+        \end{array}$$
+    \end{table}
+
+    \begin{table}[h]
+        \centering
+        \caption{Laplace Transform Calculus}
+        $$\def\arraystretch{3}
+        \begin{array}{>{\displaystyle}c|>{\displaystyle}c}
+            f(t) = \mathscr{L}^{-1}\{F(s)\} & F(s) = \mathscr{L}\{f(t)\} \\
             \hline
-            & 1 & \frac{1}{s} \\
-            & t^n & \frac{n!}{s^{n + 1}} \\
-            & \sin{at} & \frac{a}{s^2 + a^2} \\
-            & \cos{at} & \frac{s}{s^2 + a^2} \\
-            & \sinh{at} & \frac{a}{s^2 - a^2} \\
-            & \cosh{at} & \frac{s}{s^2 - a^2} \\
+            f^{(n)}(t) & s^nF(s) - \sum_{k = 0}^{n - 1}{s^{n - k}f^{(k)}(0)} \\
+            \int_0^t{f(\tau)\ d\tau} & \frac{1}{s}F(s) \\
         \end{array}$$
     \end{table}
 \end{document}
