@@ -1,13 +1,63 @@
 \documentclass{article}
 
 \usepackage{amsmath}
-% \usepackage{circuitikz}
+\usepackage{circuitikz}
 
 \title{Circuits}
 \author{Tristan Slater}
 
 \begin{document}
     \maketitle
+
+    \tableofcontents
+
+    \section{Components}
+
+    \begin{table}[h]
+        \begin{tabular}{llclc}
+            \begin{circuitikz}[american]
+                \draw (0, 0) to[R] (2, 0);
+            \end{circuitikz} & Resistor & $R$ & Ohm & $\Omega$ \\
+            \begin{circuitikz}[american]
+                \draw (0, 0) to[C] (2, 0);
+            \end{circuitikz} & Capacitor & $C$ & Farad & F \\
+            \begin{circuitikz}[american]
+                \draw (0, 0) to[L] (2, 0);
+            \end{circuitikz} & Inductor & $L$ & Henry & H \\
+            \begin{circuitikz}[american]
+                \draw (0, 0) to[V] (2, 0);
+            \end{circuitikz} & Voltage Source & $V$ & Henry & V \\
+            \begin{circuitikz}[american]
+                \draw (0, 0) to[I] (2, 0);
+            \end{circuitikz} & Current Source & $I$ & Henry & A \\
+        \end{tabular}
+    \end{table}
+
+    \section{Equivalent Resistance}
+
+    \subsection{Series}
+
+    \begin{equation}
+        R_\text{eq} = \sum{R}
+    \end{equation}
+
+    \subsection{Parallel}
+
+    \begin{equation}
+        R_\text{eq} = \left[\sum{\frac{1}{R}}\right]^{-1}
+    \end{equation}
+
+    \section{Inductance}
+
+    \begin{equation}
+        v = L\frac{di}{dt}
+    \end{equation}
+
+    \section{Capacitance}
+
+    \begin{equation}
+        i = C\frac{dv}{dt}
+    \end{equation}
 
     \section{Ohm's Law}
 
@@ -21,17 +71,32 @@
         P = IV
     \end{equation}
 
-    \section{Kirchoff's Laws}
+    \section{Kirchhoff's Laws}
 
-    \subsection{Kirchoff's Current Law}
+    \subsection{Kirchhoff's Current Law (KCL)}
 
     For all lines in and out of a junction: \begin{equation}
         \sum{I} = 0
     \end{equation}
 
-    \subsection{Kirchoff's Voltage Law}
+    \subsection{Kirchhoff's Voltage Law (KVL)}
 
     Around any closed loop circuit: \begin{equation}
         \sum{V} = 0
     \end{equation}
+
+    \section{Nodal Analysis}
+
+    \begin{itemize}
+        \item Pick a reference node and treat as zero voltage (voltages are always relative)
+        \item Use Kirchhoff's \textit{current} law (KCL) in terms of voltage
+        \item Into node $\implies (+)$ 
+        \item Out of node $\implies (-)$
+    \end{itemize}
+
+    \section{Loop Analysis}
+
+    \begin{itemize}
+        \item Use Kirchhoff's \textit{voltage} law (KVL) in terms of current
+    \end{itemize}
 \end{document}
